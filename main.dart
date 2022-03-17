@@ -36,9 +36,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      setState(() {
-                        leftDice = Random().nextInt(6) + 1;
-                      });
+                      changeState();
                     },
                     onLongPress: () {
                       setState(() {
@@ -54,9 +52,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      setState(() {
-                        rightDice = Random().nextInt(6) + 1;
-                      });
+                      changeState();
                     },
                     onLongPress: () {
                       setState(() {
@@ -72,5 +68,12 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  void changeState() {
+    setState(() {
+      leftDice = Random().nextInt(6) + 1;
+      rightDice = Random().nextInt(6) + 1;
+    });
   }
 }
