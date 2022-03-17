@@ -1,11 +1,22 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var leftDice = 1;
+
+  var rightDice = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +29,45 @@ class MyApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child: Image.asset('images/dice1.png')),
-              SizedBox(
-                width: 15,
-              ),
-              Expanded(child: Image.asset('images/dice2.png')),
-            ],
+          child: Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        leftDice = Random().nextInt(6) + 1;
+                      });
+                    },
+                    onLongPress: () {
+                      setState(() {
+                        leftDice = 6;
+                      });
+                    },
+                    child: Image.asset('images/dice$leftDice.png'),
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        rightDice = Random().nextInt(6) + 1;
+                      });
+                    },
+                    onLongPress: () {
+                      setState(() {
+                        rightDice = 6;
+                      });
+                    },
+                    child: Image.asset('images/dice$rightDice.png'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
